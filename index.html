@@ -14,22 +14,48 @@
 
     <!--CSS:-->
     <link rel="stylesheet" href="stylesheet.css">
+
   </head>
 
 <!--Content-->
 <body>
     
     <!--Headline definition-->
-    <h1 class="headline"> 
-        BookCorner <br>  Bücherregal
-    </h1>
-    
-    Link zu Lovelybook: <a href="https://www.lovelybooks.de/" >LovelyBooks</a> <!--Link verknüpfen-->
+    <div class="navbar">
+        <h1 class="headline"> 
+            BookCorner 
+        </h1>
+
+        <div>
+            <a href="#">Bücherregal</a>
+            <a href="#">SuB</a>
+            <a href="#">Wunschliste</a>
+        </div>
+    </div>
+
+
+    <!-- <a href="https://www.lovelybooks.de/" >LovelyBooks</a> Link verknüpfen-->
 
     Hier sind alle Bücher aufgelistet, die sich in meinem Bücherregal befinden oder schon gelesen worden sind. 
     
-    <div class="image_container"> <!--Unsicherbarer Container div-->
+    <div class="front_container"> <!--Unsicherbarer Container div-->
         <img class="header_image" src="EntranceBook.jpg">     <!--Insert picture-->
+        <div class="caption_container">
+            Aktuelle Leseübersicht
+        </div>
+
     </div>
+
+    <div class="second_container">
+        <img class="left_image" src="EntranceBook.jpg">     <!--Insert picture-->
+        <div class="caption_container right_container">
+            Nächste Veröffentlichungen
+        </div>
+
+    
+
+    </div>
+        
+
 </body>
 </html>

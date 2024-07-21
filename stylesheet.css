@@ -1,23 +1,83 @@
 <style>
-        body{
-            font-family: "Open Sans", sans-serif;
-            background-color: whitesmoke;
-            padding-left: 100px;
-            padding-right: 100px;
-        }
-    .header_image{
-        width:100%
+{}
+
+/* Whole body design*/
+
+    body{
+        font-family: "Open Sans", sans-serif;
+        background-color: lightgrey;
+        padding-left: 100px;
+        padding-right: 100px;    
     }
 
+    /* Healine Design*/
+   
     .headline{
-        color:rgb(220, 159, 223);
+        color:rgb(181, 78, 187);
         font-family: "Dancing Script", cursive;
+        font-size: 60px;
     }
 
-    .image_container{
+    
+    .navbar{
+        display:flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    a{
+        color: rgb(192, 140, 140);
+        text-decoration: none;
+        margin-left: 16px;
+        font-weight: 600;
+    }
+
+    a:hover{
+        text-decoration: underline;
+        text-decoration-color: brown;
+    }
+ 
+    /*Container Design Front Page*/
+    .header_image{
+        width:100%;
+        height:400px;
+        object-fit: cover;
+        object-position: 50% 40%;
+        display: block;
+    }
+    .front_container{
         background-color: white;
         padding: 16px;
     }
 
+    .second_container{
+        background-color: white;
+        padding: 16px;
+        display: flex;
+        justify-content: space-between;
+
     }
+
+    .caption_container{
+    background-color: #DEDEDE;
+    padding: 8px;
+    color: black;
+    font-weight:600;
+    }
+.left_image{
+    width:100%;
+    height:400px;
+    object-fit: cover;
+    object-position: 50% 40%;
+    display: block;
+
+}
+    .right_container{
+        width: 30%;
+        border-left:solid;
+        border-color: white;
+        border-width: 16px;
+
+    }
+
     </style>
