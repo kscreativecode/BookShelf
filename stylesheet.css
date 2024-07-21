@@ -1,0 +1,23 @@
+<style>
+        body{
+            font-family: "Open Sans", sans-serif;
+            background-color: whitesmoke;
+            padding-left: 100px;
+            padding-right: 100px;
+        }
+    .header_image{
+        width:100%
+    }
+
+    .headline{
+        color:rgb(220, 159, 223);
+        font-family: "Dancing Script", cursive;
+    }
+
+    .image_container{
+        background-color: white;
+        padding: 16px;
+    }
+
+    }
+    </style>
