@@ -121,11 +121,26 @@
 
     .booklist {
         margin-top: 20px;
-        margin-right: 5px;
         padding: 0 20px 10px 25px;
         display: flex;
         flex-direction: column;
         gap: 15px;
         list-style: none;
       }
+
+      .booklist li{
+        font-size: small;
+        background-color: whitesmoke;
+        padding: 10px;
+      }
+
+.bookcontainer{
+
+}
+      .bookoverview{
+        background-color: white;
+        padding: 16px;
+        display: flex;
+        justify-content: space-between;
+    }
     </style>
