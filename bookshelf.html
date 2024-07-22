@@ -14,6 +14,7 @@
 
     <!--CSS:-->
     <link rel="stylesheet" href="stylesheet.css">
+
 </head>
 
 <body>
@@ -31,26 +32,17 @@
         </div>
     </div>
 
-<div class="bookshelf">
+ <div class="containertest">
+    <div class="bookshelf">
 
- <p>
-<input type="text" id="Eingabe"> Gebe dein Buch ein.
- </p>
-<p>
-<input value="Speichern" type="button" onclick="myfunction()">
-</p>
-
-    <!--Add books to shelf-->
-    <div class="book">
-        <div class="side spine">
-            <span class="span-title"> Book Title </span>
-            <span class="span-author"> PG </span>
-        </div>
-
-        <div class="side top"></div>
-        <div class="side cover"></div>
-    </div> 
-
+        <p>
+        <input  type="text" id="Eingabe"> Gebe dein Buch ein.
+        </p>
+        <p>
+        <input value="Speichern" type="button" onclick="add()">
+        </p>
+    </div>
+<ul class="booklist"> </ul>
 
 </div>
 

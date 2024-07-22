@@ -116,4 +116,16 @@
     button:hover{
         transform:rotate(360deg);
     }
+
+
+
+    .booklist {
+        margin-top: 20px;
+        margin-right: 5px;
+        padding: 0 20px 10px 25px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        list-style: none;
+      }
     </style>
