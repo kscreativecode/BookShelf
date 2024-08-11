@@ -30,21 +30,23 @@ function createBookElement(title, authors, thumbnail, bookId, isSaved = false) {
     bookItem.appendChild(bookTitle);
     bookItem.appendChild(bookAuthors);
 
-    // Speichern-Button hinzufügen
     if (!isSaved) {
         const saveButton = document.createElement('button');
         saveButton.textContent = 'Gelesen';
-        saveButton.onclick = () => {saveBookToLocalStorage({ title, authors, thumbnail, id: bookId});
-        showNotification('Buch hinzugefügt'); // Zeige die Benachrichtigung hier
+        saveButton.onclick = () => {
+            saveBookToLocalStorage({ title, authors, thumbnail, id: bookId });
+            showNotification('Buch hinzugefügt');
         };
         bookItem.appendChild(saveButton);
     }
 
-    // Löschen-Button hinzufügen, wenn das Buch bereits gespeichert ist
     if (isSaved) {
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Löschen';
-        deleteButton.onclick = () => deleteBookFromLocalStorage(bookId);
+        deleteButton.onclick = () => {
+            deleteBookFromLocalStorage(bookId);
+            showNotification('Buch gelöscht');
+        };
         bookItem.appendChild(deleteButton);
     }
 
@@ -66,7 +68,7 @@ function displayBooks(books, containerId, isSaved = false) {
         console.error('Container nicht gefunden:', containerId);
         return;
     }
-    container.innerHTML = ''; // Vorherigen Inhalt leeren
+    container.innerHTML = '';
 
     books.forEach(item => {
         const title = item.volumeInfo.title;
@@ -82,12 +84,13 @@ function displayBooks(books, containerId, isSaved = false) {
 function saveBookToLocalStorage(book) {
     const bookId = book.id;
     localStorage.setItem(`book_${bookId}`, JSON.stringify(book));
-    downloadLocalStorageBackup(); // Backup erstellen, wenn ein Buch gespeichert wird
+    saveBooksToServer(); // Backup erstellen, wenn ein Buch gespeichert wird
 }
 
 function deleteBookFromLocalStorage(bookId) {
     localStorage.removeItem(`book_${bookId}`);
-    displaySavedBooks(); // Aktualisiere die Anzeige nach dem Löschen
+    saveBooksToServer();
+    displaySavedBooks();
 }
 
 function loadBooksFromLocalStorage() {
@@ -111,16 +114,46 @@ function searchAndDisplayBooks() {
             console.log('Keine Bücher gefunden');
         }
     });
-    
+}
+
+function saveBooksToServer() {
+    const savedBooks = loadBooksFromLocalStorage();
+    fetch('/save_books', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(savedBooks),
+    }).then(response => response.json())
+      .then(data => {
+          console.log(data.message);
+      })
+      .catch(error => {
+          console.error('Fehler beim Speichern auf dem Server:', error);
+      });
+}
+
+function loadBooksFromServer() {
+    fetch('/load_books')
+        .then(response => response.json())
+        .then(books => {
+            books.forEach(book => {
+                localStorage.setItem(`book_${book.id}`, JSON.stringify(book));
+            });
+            displaySavedBooks();
+        })
+        .catch(error => {
+            console.error('Fehler beim Laden der Bücher:', error);
+        });
 }
 
 function init() {
-    displaySavedBooks(); // Zeige nur gespeicherte Bücher beim Laden der Seite an
+    loadBooksFromServer(); // Lade Bücher von Server beim Start
 }
 
 function displaySavedBooks() {
     const container = document.getElementById('saved-books');
-    container.innerHTML = ''; // Vorherigen Inhalt leeren
+    container.innerHTML = '';
 
     const savedBooks = loadBooksFromLocalStorage();
     savedBooks.forEach(book => {
@@ -134,32 +167,11 @@ function showNotification(message) {
     notification.textContent = message;
     notification.style.display = 'block';
 
-    // Verstecke die Benachrichtigung nach 3 Sekunden
     setTimeout(() => {
         notification.style.display = 'none';
     }, 3000);
 }
-function downloadLocalStorageBackup() {
-    const data = {};
-    Object.keys(localStorage).forEach(key => {
-        data[key] = localStorage.getItem(key);
-    });
-
-    const json = JSON.stringify(data);
-    const blob = new Blob([json], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'localStorage-backup.json';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-}
-
-
 
 window.onload = init;
 
 document.getElementById('searchButton').addEventListener('click', searchAndDisplayBooks);
-document.getElementById('showSavedBooksButton').addEventListener('click', displaySavedBooks);
