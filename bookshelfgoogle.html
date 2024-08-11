@@ -31,16 +31,30 @@
         </div>
     </div>
 
-    <h1>Google Books API </h1>
-    <input type="text" id="search" placeholder="Buchtitel eingeben">
-    <button onclick="searchBooks()">Suchen</button>
-    <div id="results"></div>
+    <h1>Virtuellen Bücherregal </h1>
+
+    <!-- Suchbereich -->
+    <div id="searchSection">
+        <input type="text" id="searchInput" placeholder="Nach einem Buch suchen...">
+        <button id="searchButton">Suchen</button>
+        <button id="showSavedBooksButton">Gespeicherte Bücher anzeigen</button>
+    </div>
+
+   <!-- <button onclick="searchBooks()">Suchen</button> -->
+    <div id="book-list"></div>
+    <div id="saved-books"></div>
 
     <script src="googleapp.js"></script>
 
+   <!-- <h1>Meine Bücher</h1>
+    <input type="text" id="suche" placeholder="Buchtitel eingeben">
+    <button onclick="searchBooks()">Suchen</button>
+    <button onclick="displaySavedBooks()">Gespeicherte Bücher anzeigen</button>
+    <ul id="book-list"></ul>
 
 
 
+    <script src="script.js"></script> -->
     
 </body>
 </html>

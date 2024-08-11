@@ -1,7 +1,7 @@
 <style>
-{}
+   {}
 
-/* Whole body design*/
+   /* Whole body design*/
 
     body{
         font-family: "Open Sans", sans-serif;
@@ -93,7 +93,7 @@
     object-position: 50% 40%;
     display: block;
 
-}
+    }
     .right_container{
         width: 30%;
         border-left:solid;
@@ -109,9 +109,13 @@
         background-color: inherit;
     }
 
-    button{
-        transition: transform 0.7s ease-in-out;
-    }
+
+
+      button:active {
+        text-decoration: unset;
+        position: relative;
+        top: 2px;
+      }
 
     button:hover{
         transform:rotate(360deg);
@@ -134,13 +138,54 @@
         padding: 10px;
       }
 
-.bookcontainer{
-
-}
       .bookoverview{
         background-color: white;
         padding: 16px;
         display: flex;
         justify-content: space-between;
     }
-    </style>
+
+
+
+
+
+    #searchSection {
+        margin-bottom: 20px;
+    }
+
+    #searchInput {
+        width: 300px;
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    #searchButton {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    #book-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .book-item {
+        background-color: white;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        width: 200px;
+        text-align: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .book-item img {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+    }
+
+  
+  </style> 
