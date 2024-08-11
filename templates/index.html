@@ -14,7 +14,6 @@
 
     <!--CSS:-->
     <link rel="stylesheet" href="/static/stylesheet.css">
-
   </head>
 
 <!--Content-->
@@ -29,56 +28,34 @@
         </h1>
 
         <div>
-            <a class="subpage" href="{{ url_for('bookshelfgoogle') }}">Bücherregal mit Google</a>
+            <a class="subpage" href="{{ url_for('bookshelfgoogle') }}">Büchersuche</a>
             <a class="subpage" href="{{ url_for('bookshelf') }}">Bücherregal</a>
             <a class="subpage" href="#">SuB</a>
             <a class="subpage" href="#">Wunschliste</a>
         </div>
     </div>
-
-
-    <!-- <a href="https://www.lovelybooks.de/" >LovelyBooks</a> Link verknüpfen-->
-
-    Hier sind alle Bücher aufgelistet, die sich in meinem Bücherregal befinden oder schon gelesen worden sind. 
     
-    <!--Test Bereich Button-->
-    <div class="front_container"> <!--Unsicherbarer Container div-->
-         
-        
-        <div class="button_container">
-
-            <div class="caption_container">
-            Button
-            </div>
-
-            <div >
-               <a href="/templates/bookshelf.html">
-                <button type="button" >
-                    <img class="button_image" src="/static/Pictures/book.jpg">     <!--Insert picture-->
-                </button> 
-               </a>
-            </div>
-        </div>
-
-    </div>
-
-    <!--Test Bereich Ende - Kann gelöscht werden auf Wunsch-->
+    <section id="latest-books-container">
+        <h2>Letzte 5 hinzugefügte Bücher</h2>
+    </section>
+   
+        <script src="/static/googleapp.js"></script>
 
 
-    <div class="front_container"> <!--Unsicherbarer Container div-->
-        <img class="header_image" src="/static/Pictures/EntranceBook.jpg">     <!--Insert picture-->
+
+    <!-- <div class="front_container"> Unsicherbarer Container div
+        <img class="header_image" src="/static/Pictures/EntranceBook.jpg">     
         <div class="caption_container">
-            Aktuelle Leseübersicht
+            Leseziel 2024
         </div>
 
     </div>
 
     <div class="second_container">
-        <img class="left_image" src="/static/Pictures/EntranceBook.jpg">     <!--Insert picture-->
+        <img class="left_image" src="/static/Pictures/EntranceBook.jpg">     
         <div class="caption_container right_container">
             Nächste Veröffentlichungen
-        </div>
-
+        </div>  -->
     
 
     </div>

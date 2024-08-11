@@ -23,19 +23,20 @@
         </h1>
 
         <div>
-            <a class="subpage" href="{{ url_for('bookshelfgoogle') }}">Bücherregal mit Google</a>
+            <a class="subpage" href="{{ url_for('bookshelfgoogle') }}">Büchersuche</a>
             <a class="subpage" href="{{ url_for('bookshelf') }}">Bücherregal</a>
              <a class="subpage" href="#">SuB</a>
              <a class="subpage" href="#">Wunschliste</a>
         </div>
     </div>
 
-    <h1>Virtuellen Bücherregal </h1>
+    <h1>Bücherregal </h1>
 
-<div class="front_container"> <!--Unsicherbarer Container div-->
+<div class="button_container"> <!--Unsicherbarer Container div-->
 <!-- Suchbereich -->
-Gespeicherte Bücher: 
 
+<div class="caption_container">
+Gespeicherte Bücher: 
 
 <div id="saved-books"></div>
 
@@ -59,8 +60,20 @@ Gespeicherte Bücher:
         }
     });
 </script>
-
 </div>
+
+
+<!--hier soll bei drücken des knopfes eine Backup Datei erzeugt werden-->
+    <div >
+       <a href="/templates/bookshelf.html">
+        <button type="button" >
+            <img class="button_image" src="/static/Pictures/backup.png">     <!--Insert picture-->
+        </button> 
+       </a>
+    </div>
+</div>
+
+
 
  
 </body>

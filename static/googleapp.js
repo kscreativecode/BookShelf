@@ -81,11 +81,6 @@ function displayBooks(books, containerId, isSaved = false) {
     });
 }
 
-function saveBookToLocalStorage(book) {
-    const bookId = book.id;
-    localStorage.setItem(`book_${bookId}`, JSON.stringify(book));
-    saveBooksToServer(); // Backup erstellen, wenn ein Buch gespeichert wird
-}
 
 function deleteBookFromLocalStorage(bookId) {
     localStorage.removeItem(`book_${bookId}`);
@@ -147,9 +142,38 @@ function loadBooksFromServer() {
         });
 }
 
+
+function getLastFiveBooks() {
+    const savedBooks = loadBooksFromLocalStorage();
+    savedBooks.sort((a, b) => new Date(b.addedDate) - new Date(a.addedDate));
+    return savedBooks.slice(0, 5);
+}
+
+function displayLastFiveBooks() {
+    const container = document.getElementById('latest-books-container');
+   
+
+    if (!container) {
+        console.error('Container nicht gefunden: latest-books-container');
+        return;
+    }
+    console.log('Container gefunden. Lade die letzten 5 Bücher.');
+
+    const books = getLastFiveBooks();
+    displayBooks(books, 'latest-books-container', true);
+}
+
 function init() {
     loadBooksFromServer(); // Lade Bücher von Server beim Start
+    displayLastFiveBooks(); // Zeige die letzten 5 Bücher an
 }
+
+function saveBookToLocalStorage(book) {
+    const bookWithDate = { ...book, addedDate: new Date().toISOString() };
+    const bookId = book.id;
+    localStorage.setItem(`book_${bookId}`, JSON.stringify(bookWithDate));
+    saveBooksToServer(); // Backup erstellen, wenn ein Buch gespeichert wird
+} 
 
 function displaySavedBooks() {
     const container = document.getElementById('saved-books');

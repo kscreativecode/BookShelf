@@ -145,10 +145,6 @@
         justify-content: space-between;
     }
 
-
-
-
-
     #searchSection {
         margin-bottom: 20px;
     }
@@ -200,6 +196,18 @@
         right: 10px;
         z-index: 1000; /* Stellt sicher, dass es über anderen Inhalten angezeigt wird */
     }
+    
 
+    #latest-books-container {
+        background-color: #f0f0f0; /* Hintergrundfarbe für Sichtbarkeit */
+        padding: 20px;
+        border: 1px solid #ccc; /* Rand zur besseren Sichtbarkeit */
+        display: block;
+        margin: 20px 0;
+    }
+    
+    #latest-books-container h2 {
+        color: #333; /* Textfarbe für bessere Lesbarkeit */
+    }
   
   </style> 
