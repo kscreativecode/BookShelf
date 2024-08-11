@@ -7,9 +7,29 @@ app = Flask(__name__)
 # Pfad zur Backup-Datei
 BACKUP_FILE = 'books_backup.json'
 
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/bookshelfgoogle')
+def bookshelfgoogle():
+    return render_template('bookshelfgoogle.html')
+
+@app.route('/bookshelf')
+def bookshelf():
+    return render_template('bookshelf.html')
+
+@app.route('/sub')
+def sub():
+    return render_template('sub.html')
+
+@app.route('/wishlist')
+def wishlist():
+    return render_template('wishlist.html')
 
 @app.route('/save_books', methods=['POST'])
 def save_books():

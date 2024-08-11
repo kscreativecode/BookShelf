@@ -25,12 +25,12 @@
     <!--Headline definition-->
     <div class="navbar">
         <h1 class="headline"> 
-            <a class="title" href="/templates/index.html">BookCorner</a> 
+            <a class="title" href="{{ url_for('index')}}">BookCorner</a> 
         </h1>
 
         <div>
-            <a class="subpage" href="/templates/bookshelfgoogle.html">Bücherregal mit Google</a>
-            <a class="subpage" href="/templates/bookshelf.html">Bücherregal</a>
+            <a class="subpage" href="{{ url_for('bookshelfgoogle') }}">Bücherregal mit Google</a>
+            <a class="subpage" href="{{ url_for('bookshelf') }}">Bücherregal</a>
             <a class="subpage" href="#">SuB</a>
             <a class="subpage" href="#">Wunschliste</a>
         </div>
