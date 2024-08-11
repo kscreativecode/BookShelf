@@ -73,7 +73,7 @@ function displayBooks(books, containerId, isSaved = false) {
     books.forEach(item => {
         const title = item.volumeInfo.title;
         const authors = item.volumeInfo.authors ? item.volumeInfo.authors.join(', ') : 'Unbekannter Autor';
-        const thumbnail = item.volumeInfo.imageLinks ? item.volumeInfo.imageLinks.thumbnail : '';
+        const thumbnail = item.volumeInfo?.imageLinks?.thumbnail || '';
         const bookId = item.id;
 
         const bookElement = createBookElement(title, authors, thumbnail, bookId, isSaved);
@@ -128,19 +128,19 @@ function saveBooksToServer() {
       });
 }
 
-function loadBooksFromServer() {
-    fetch('/load_books')
-        .then(response => response.json())
-        .then(books => {
-            books.forEach(book => {
-                localStorage.setItem(`book_${book.id}`, JSON.stringify(book));
-            });
-            displaySavedBooks();
-        })
-        .catch(error => {
-            console.error('Fehler beim Laden der Bücher:', error);
+async function loadBooksFromServer() {
+    try {
+        const response = await fetch('/load_books');
+        const books = await response.json();
+        books.forEach(book => {
+            localStorage.setItem(`book_${book.id}`, JSON.stringify(book));
         });
+        displaySavedBooks();
+    } catch (error) {
+        console.error('Fehler beim Laden der Bücher:', error);
+    }
 }
+
 
 
 function getLastFiveBooks() {
@@ -149,23 +149,11 @@ function getLastFiveBooks() {
     return savedBooks.slice(0, 5);
 }
 
-function displayLastFiveBooks() {
-    const container = document.getElementById('latest-books-container');
-   
 
-    if (!container) {
-        console.error('Container nicht gefunden: latest-books-container');
-        return;
-    }
-    console.log('Container gefunden. Lade die letzten 5 Bücher.');
 
-    const books = getLastFiveBooks();
-    displayBooks(books, 'latest-books-container', true);
-}
-
-function init() {
-    loadBooksFromServer(); // Lade Bücher von Server beim Start
-    displayLastFiveBooks(); // Zeige die letzten 5 Bücher an
+async function init() {
+    await  loadBooksFromServer(); // Lade Bücher von Server beim Start
+     displayLastFiveBooks(); // Zeige die letzten 5 Bücher an
 }
 
 function saveBookToLocalStorage(book) {
@@ -184,6 +172,12 @@ function displaySavedBooks() {
         const bookElement = createBookElement(book.title, book.authors, book.thumbnail, book.id, true);
         addBookToContainer('saved-books', bookElement);
     });
+}
+
+function displayLastFiveBooks() {
+    const container = document.getElementById('latest-books-container');
+    const books = getLastFiveBooks();
+    displayBooks(books, 'latest-books-container', true);
 }
 
 function showNotification(message) {

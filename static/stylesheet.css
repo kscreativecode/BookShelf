@@ -209,5 +209,22 @@
     #latest-books-container h2 {
         color: #333; /* Textfarbe für bessere Lesbarkeit */
     }
+
+    .book-item img {
+        max-width: 100%;
+        height: auto;
+        display: block; /* Stellt sicher, dass das Bild angezeigt wird */
+        margin-bottom: 10px;
+    }
+
+    .book-item {
+        background-color: white;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        width: 200px;
+        text-align: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
   
   </style> 
