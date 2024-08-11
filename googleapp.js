@@ -33,8 +33,10 @@ function createBookElement(title, authors, thumbnail, bookId, isSaved = false) {
     // Speichern-Button hinzufügen
     if (!isSaved) {
         const saveButton = document.createElement('button');
-        saveButton.textContent = 'Speichern';
-        saveButton.onclick = () => saveBookToLocalStorage({ title, authors, thumbnail, id: bookId });
+        saveButton.textContent = 'Gelesen';
+        saveButton.onclick = () => {saveBookToLocalStorage({ title, authors, thumbnail, id: bookId});
+        showNotification('Buch hinzugefügt'); // Zeige die Benachrichtigung hier
+        };
         bookItem.appendChild(saveButton);
     }
 
@@ -80,6 +82,7 @@ function displayBooks(books, containerId, isSaved = false) {
 function saveBookToLocalStorage(book) {
     const bookId = book.id;
     localStorage.setItem(`book_${bookId}`, JSON.stringify(book));
+    downloadLocalStorageBackup(); // Backup erstellen, wenn ein Buch gespeichert wird
 }
 
 function deleteBookFromLocalStorage(bookId) {
@@ -108,6 +111,7 @@ function searchAndDisplayBooks() {
             console.log('Keine Bücher gefunden');
         }
     });
+    
 }
 
 function init() {
@@ -124,6 +128,36 @@ function displaySavedBooks() {
         addBookToContainer('saved-books', bookElement);
     });
 }
+
+function showNotification(message) {
+    const notification = document.getElementById('notification');
+    notification.textContent = message;
+    notification.style.display = 'block';
+
+    // Verstecke die Benachrichtigung nach 3 Sekunden
+    setTimeout(() => {
+        notification.style.display = 'none';
+    }, 3000);
+}
+function downloadLocalStorageBackup() {
+    const data = {};
+    Object.keys(localStorage).forEach(key => {
+        data[key] = localStorage.getItem(key);
+    });
+
+    const json = JSON.stringify(data);
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'localStorage-backup.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
+
 
 window.onload = init;
 

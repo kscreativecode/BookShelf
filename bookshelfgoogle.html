@@ -33,28 +33,24 @@
 
     <h1>Virtuellen Bücherregal </h1>
 
+
+    <div class="front_container"> <!--Unsicherbarer Container div-->
     <!-- Suchbereich -->
     <div id="searchSection">
         <input type="text" id="searchInput" placeholder="Nach einem Buch suchen...">
         <button id="searchButton">Suchen</button>
-        <button id="showSavedBooksButton">Gespeicherte Bücher anzeigen</button>
+    </div>
+    
+    <div id="book-list"></div>
+    <!-- Container für die Benachrichtigung -->
+<div id="notification" style="display: none; background-color: #d4edda; color: #155724; padding: 10px; margin: 10px 0; border: 1px solid #c3e6cb; border-radius: 5px;">
+</div>
+    <script src="googleapp.js"></script>
     </div>
 
-   <!-- <button onclick="searchBooks()">Suchen</button> -->
-    <div id="book-list"></div>
-    <div id="saved-books"></div>
-
-    <script src="googleapp.js"></script>
-
-   <!-- <h1>Meine Bücher</h1>
-    <input type="text" id="suche" placeholder="Buchtitel eingeben">
-    <button onclick="searchBooks()">Suchen</button>
-    <button onclick="displaySavedBooks()">Gespeicherte Bücher anzeigen</button>
-    <ul id="book-list"></ul>
 
 
 
-    <script src="script.js"></script> -->
-    
+ 
 </body>
 </html>
