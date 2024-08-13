@@ -1,0 +1,8 @@
+# Virtuelle Umgebung
+venv/
+
+# VS Code Konfigurationsordner
+.vscode/
+
+# Backup-Dateien
+book_backup.json

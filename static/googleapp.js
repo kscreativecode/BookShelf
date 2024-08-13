@@ -62,26 +62,6 @@ function addBookToContainer(containerId, bookElement) {
     }
 }
 
-function displayBooks(books, containerId, isSaved = false) {
-    const container = document.getElementById(containerId);
-    if (!container) {
-        console.error('Container nicht gefunden:', containerId);
-        return;
-    }
-    container.innerHTML = '';
-
-    books.forEach(item => {
-        const title = item.volumeInfo.title;
-        const authors = item.volumeInfo.authors ? item.volumeInfo.authors.join(', ') : 'Unbekannter Autor';
-        const thumbnail = item.volumeInfo?.imageLinks?.thumbnail || '';
-        const bookId = item.id;
-
-        const bookElement = createBookElement(title, authors, thumbnail, bookId, isSaved);
-        addBookToContainer(containerId, bookElement);
-    });
-}
-
-
 function deleteBookFromLocalStorage(bookId) {
     localStorage.removeItem(`book_${bookId}`);
     saveBooksToServer();
@@ -140,17 +120,24 @@ async function loadBooksFromServer() {
         console.error('Fehler beim Laden der Bücher:', error);
     }
 }
-
-
-
+//ändern
 function getLastFiveBooks() {
-    const savedBooks = loadBooksFromLocalStorage();
-    savedBooks.sort((a, b) => new Date(b.addedDate) - new Date(a.addedDate));
-    return savedBooks.slice(0, 5);
+    const books = loadBooksFromLocalStorage();
+    
+    // Überprüfe die geladenen Bücher
+    console.log('Alle gespeicherten Bücher:', books);
+    
+    // Hole die letzten 5 Bücher oder weniger, wenn es weniger als 5 Bücher gibt
+    const lastFiveBooks = books.slice(-5);
+    
+    // Überprüfe die letzten 5 Bücher
+    console.log('Die letzten 5 Bücher:', lastFiveBooks);
+    
+    return lastFiveBooks;
 }
 
 
-
+//
 async function init() {
     await  loadBooksFromServer(); // Lade Bücher von Server beim Start
      displayLastFiveBooks(); // Zeige die letzten 5 Bücher an
@@ -174,10 +161,44 @@ function displaySavedBooks() {
     });
 }
 
+// ändern?S
 function displayLastFiveBooks() {
     const container = document.getElementById('latest-books-container');
+    if (!container) {
+        console.error('Container "latest-books-container" nicht gefunden');
+        return;
+    }
+    console.log('Container gefunden:', container); // Überprüfe, ob der Container vorhanden ist
+
     const books = getLastFiveBooks();
-    displayBooks(books, 'latest-books-container', true);
+    console.log('Anzuzeigende Bücher:', books);
+
+    displayBooks(books, 'latest-books-container', true, true);
+}
+
+
+function displayBooks(books, containerId, clearContainer = false, isSaved = false) {
+    const container = document.getElementById(containerId);
+    if (!container) {
+        console.error('Container nicht gefunden:', containerId);
+        return;
+    }
+
+    if (clearContainer) {
+        container.innerHTML = ''; // Container leeren, bevor neue Bücher hinzugefügt werden
+    }
+
+    books.forEach(book => {
+        console.log('Verarbeite Buch:', book); // Füge diese Zeile hinzu, um das Buchobjekt zu überprüfen
+
+        const title = book.title || book.volumeInfo?.title || 'Unbekannter Titel';
+        const authors = Array.isArray(book.authors) ? book.authors.join(', ') : book.authors || 'Unbekannter Autor';
+        const thumbnail = book.thumbnail || book.volumeInfo?.imageLinks?.thumbnail || '';
+        const bookId = book.id || book.volumeInfo?.id || 'unknown_id';
+
+        const bookElement = createBookElement(title, authors, thumbnail, bookId, isSaved);
+        container.appendChild(bookElement);
+    });
 }
 
 function showNotification(message) {
@@ -190,6 +211,10 @@ function showNotification(message) {
     }, 3000);
 }
 
-window.onload = init;
+window.onload = function() {
+    init(); // Stelle sicher, dass die init-Funktion aufgerufen wird, wenn du diese verwendest
+
+    displayLastFiveBooks(); // Die letzten 5 Bücher beim Laden der Seite anzeigen
+};
 
 document.getElementById('searchButton').addEventListener('click', searchAndDisplayBooks);

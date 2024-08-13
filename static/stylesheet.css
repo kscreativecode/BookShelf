@@ -206,8 +206,12 @@
         margin: 20px 0;
     }
     
-    #latest-books-container h2 {
-        color: #333; /* Textfarbe für bessere Lesbarkeit */
+    #latest-books-container {
+        background-color: #f0f0f0; /* Hintergrundfarbe für Sichtbarkeit */
+        padding: 20px;
+        border: 1px solid #ccc; /* Rand zur besseren Sichtbarkeit */
+        display: block;
+        margin: 20px 0;
     }
 
     .book-item img {
@@ -217,14 +221,14 @@
         margin-bottom: 10px;
     }
 
-    .book-item {
-        background-color: white;
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        width: 200px;
-        text-align: center;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+   
+        .book-item {
+            background-color: violet;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 200px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-  
   </style> 
