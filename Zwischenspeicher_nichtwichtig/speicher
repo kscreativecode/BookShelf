@@ -9,36 +9,26 @@ function fetchBooks(query, apiKey) {
             return [];
         });
 }
-function createBookElement(title, authors, thumbnail, bookId, isSaved = false, mode = 'default') {
+
+function createBookElement(title, authors, thumbnail, bookId, isSaved = false) {
     const bookItem = document.createElement('div');
     bookItem.classList.add('book-item');
 
-    if (mode === 'thumbnailOnly') {
-        // Nur das Thumbnail anzeigen
-        const bookCover = document.createElement('img');
-        if (thumbnail) {
-            bookCover.src = thumbnail;
-            bookCover.alt = `Cover von ${title}`;
-            bookItem.appendChild(bookCover);
-        }
-    } else {
-        // Vollständige Ansicht anzeigen
-        const bookTitle = document.createElement('h2');
-        bookTitle.textContent = title;
+    const bookTitle = document.createElement('h2');
+    bookTitle.textContent = title;
 
-        const bookAuthors = document.createElement('p');
-        bookAuthors.textContent = `Autor(en): ${authors}`;
+    const bookAuthors = document.createElement('p');
+    bookAuthors.textContent = `Autor(en): ${authors}`;
 
-        const bookCover = document.createElement('img');
-        if (thumbnail) {
-            bookCover.src = thumbnail;
-            bookCover.alt = `Cover von ${title}`;
-            bookItem.appendChild(bookCover);
-        }
-
-        bookItem.appendChild(bookTitle);
-        bookItem.appendChild(bookAuthors);
+    const bookCover = document.createElement('img');
+    if (thumbnail) {
+        bookCover.src = thumbnail;
+        bookCover.alt = `Cover von ${title}`;
+        bookItem.appendChild(bookCover);
     }
+
+    bookItem.appendChild(bookTitle);
+    bookItem.appendChild(bookAuthors);
 
     if (!isSaved) {
         const saveButton = document.createElement('button');
@@ -178,17 +168,16 @@ function displayLastFiveBooks() {
         console.error('Container "latest-books-container" nicht gefunden');
         return;
     }
-    console.log('Container gefunden:', container);
+    console.log('Container gefunden:', container); // Überprüfe, ob der Container vorhanden ist
 
     const books = getLastFiveBooks();
     console.log('Anzuzeigende Bücher:', books);
 
-    displayBooks(books, 'latest-books-container', true, true, 'thumbnailOnly');
+    displayBooks(books, 'latest-books-container', true, true);
 }
 
 
-
-function displayBooks(books, containerId, clearContainer = false, isSaved = false, mode = 'default') {
+function displayBooks(books, containerId, clearContainer = false, isSaved = false) {
     const container = document.getElementById(containerId);
     if (!container) {
         console.error('Container nicht gefunden:', containerId);
@@ -207,7 +196,7 @@ function displayBooks(books, containerId, clearContainer = false, isSaved = fals
         const thumbnail = book.thumbnail || book.volumeInfo?.imageLinks?.thumbnail || '';
         const bookId = book.id || book.volumeInfo?.id || 'unknown_id';
 
-        const bookElement = createBookElement(title, authors, thumbnail, bookId, isSaved, mode);
+        const bookElement = createBookElement(title, authors, thumbnail, bookId, isSaved);
         container.appendChild(bookElement);
     });
 }
