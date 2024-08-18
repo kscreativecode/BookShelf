@@ -78,7 +78,7 @@
     padding: 8px;
     color: black;
     font-weight:600;}
-    
+
     button{
         border: none;
         cursor: pointer;
@@ -153,5 +153,15 @@
         margin: 0; /* Kein zusätzlicher Abstand oben und unten */
     }
 
+    #saved-books{
+        background-color: none; /* Hintergrundfarbe für Sichtbarkeit */
+        padding: 10px; /* Padding für den Container */
+        border: 1px solid #ccc; /* Rand zur besseren Sichtbarkeit */
+        display: flex;
+        flex-wrap: wrap; /* Falls es mehr Bücher gibt, als in eine Reihe passen, werden sie in die nächste Reihe umgebrochen */
+        gap: 10px; /* Abstand zwischen den Büchern */
+        margin: 0; /* Kein zusätzlicher Abstand oben und unten */
+
+    }
         
   </style> 

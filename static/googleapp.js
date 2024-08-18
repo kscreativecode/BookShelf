@@ -1,5 +1,6 @@
 const apiKey = "AIzaSyDNmwXFFevatsj1Gr_HOgtGychQCkwWoRc";
 
+//Using Google Books API and a search window for saving a list of books in data.items.
 function fetchBooks(query, apiKey) {
   return fetch(
     `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${apiKey}`
@@ -11,6 +12,7 @@ function fetchBooks(query, apiKey) {
       return [];
     });
 }
+// create an HTML element that represents a book
 function createBookElement(
   title,
   authors,
@@ -71,7 +73,7 @@ function createBookElement(
 
   return bookItem;
 }
-
+//insert a book element into a container element on the web page
 function addBookToContainer(containerId, bookElement) {
   const container = document.getElementById(containerId);
   if (container) {
@@ -81,12 +83,14 @@ function addBookToContainer(containerId, bookElement) {
   }
 }
 
+//deletesa book based on its ID
 function deleteBookFromLocalStorage(bookId) {
   localStorage.removeItem(`book_${bookId}`);
   saveBooksToServer();
   displaySavedBooks();
 }
 
+//load all saved books from the local memory
 function loadBooksFromLocalStorage() {
   const savedBooks = [];
   Object.keys(localStorage).forEach((key) => {
@@ -98,6 +102,7 @@ function loadBooksFromLocalStorage() {
   return savedBooks;
 }
 
+//start a book search and display the books found
 function searchAndDisplayBooks() {
   const query = document.getElementById("searchInput").value;
 
@@ -110,6 +115,7 @@ function searchAndDisplayBooks() {
   });
 }
 
+//save all locally stored books on a server
 function saveBooksToServer() {
   const savedBooks = loadBooksFromLocalStorage();
   fetch("/save_books", {
@@ -128,6 +134,7 @@ function saveBooksToServer() {
     });
 }
 
+// load books from the server and saves them in the local memory
 async function loadBooksFromServer() {
   try {
     const response = await fetch("/load_books");
@@ -140,7 +147,8 @@ async function loadBooksFromServer() {
     console.error("Fehler beim Laden der Bücher:", error);
   }
 }
-//ändern
+
+//return the last five saved books
 function getLastFiveBooks() {
   const books = loadBooksFromLocalStorage();
 
@@ -156,11 +164,13 @@ function getLastFiveBooks() {
   return lastFiveBooks;
 }
 
+//Loading the page executed
 async function init() {
   await loadBooksFromServer(); // Lade Bücher von Server beim Start
   displayLastFiveBooks(); // Zeige die letzten 5 Bücher an
 }
 
+//Function saves a book in the local memory
 function saveBookToLocalStorage(book) {
   const bookWithDate = { ...book, addedDate: new Date().toISOString() };
   const bookId = book.id;
@@ -168,6 +178,7 @@ function saveBookToLocalStorage(book) {
   saveBooksToServer(); // Backup erstellen, wenn ein Buch gespeichert wird
 }
 
+//displays all saved books on the website
 function displaySavedBooks() {
   const container = document.getElementById("saved-books");
   container.innerHTML = "";
@@ -185,6 +196,7 @@ function displaySavedBooks() {
   });
 }
 
+//shows the last five books saved
 function displayLastFiveBooks() {
   const container = document.getElementById("latest-books-container");
   if (!container) {
@@ -199,6 +211,7 @@ function displayLastFiveBooks() {
   displayBooks(books, "latest-books-container", true, true, "thumbnailOnly");
 }
 
+//Display a list of books in a specified container element on the web page
 function displayBooks(
   books,
   containerId,
