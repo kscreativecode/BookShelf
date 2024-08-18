@@ -1,80 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GoogleBooksApi</title>
 
-       <!-- Schriftarten -->
-    <!-- Dancing Script-->  <!--Open Sans-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <!-- Schriftarten -->
+    <!-- Dancing Script-->
+    <!--Open Sans-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
 
     <!--CSS:-->
-    <link rel="stylesheet" href="/static/stylesheet.css">
-</head>
-<body>
-
-      <!--Headline definition-->
+    <link rel="stylesheet" href="/static/stylesheet.css" />
+  </head>
+  <body>
+    <!--Headline definition-->
     <div class="navbar">
-        <h1 class="headline"> 
-            <a class="title" href="{{ url_for('index')}}">BookCorner</a> 
-        </h1>
+      <h1 class="headline">
+        <a class="title" href="{{ url_for('index')}}">BookCorner</a>
+      </h1>
 
+      <div>
+        <a class="subpage" href="{{ url_for('bookshelfgoogle') }}"
+          >Büchersuche</a
+        >
+        <a class="subpage" href="{{ url_for('bookshelf') }}">Bücherregal</a>
+        <a class="subpage" href="#">SuB</a>
+        <a class="subpage" href="#">Wunschliste</a>
+      </div>
+    </div>
+
+    <h1>Bücherregal</h1>
+
+    <div class="back_container">
+      <!--Unsicherbarer Container div-->
+      <!-- Suchbereich -->
+
+      <div class="caption_container">
+        Gespeicherte Bücher:
+        <div id="saved-books"></div>
+
+        <!--hier soll bei drücken des knopfes eine Backup Datei erzeugt werden-->
         <div>
-            <a class="subpage" href="{{ url_for('bookshelfgoogle') }}">Büchersuche</a>
-            <a class="subpage" href="{{ url_for('bookshelf') }}">Bücherregal</a>
-             <a class="subpage" href="#">SuB</a>
-             <a class="subpage" href="#">Wunschliste</a>
+          <a href="/templates/bookshelf.html">
+            <button type="button">
+              <img class="button_image" src="/static/Pictures/backup.png" />
+              <!--Insert picture-->
+            </button>
+
+          </a>
         </div>
+      </div>
     </div>
 
-    <h1>Bücherregal </h1>
-
-<div class="button_container"> <!--Unsicherbarer Container div-->
-<!-- Suchbereich -->
-
-<div class="caption_container">
-Gespeicherte Bücher: 
-
-<div id="saved-books"></div>
-
-<script src="/static/googleapp.js"></script>
-<input type="file" id="upload" accept=".json" />
-<script>
-    document.getElementById('upload').addEventListener('change', function(event) {
-        const file = event.target.files[0];
-        if (file && file.type === 'application/json') {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const data = JSON.parse(e.target.result);
-                Object.keys(data).forEach(key => {
-                    localStorage.setItem(key, data[key]);
-                });
-                alert('localStorage erfolgreich wiederhergestellt!');
-            };
-            reader.readAsText(file);
-        } else {
-            alert('Bitte eine gültige JSON-Datei hochladen.');
-        }
-    });
-</script>
-</div>
-
-
-<!--hier soll bei drücken des knopfes eine Backup Datei erzeugt werden-->
-    <div >
-       <a href="/templates/bookshelf.html">
-        <button type="button" >
-            <img class="button_image" src="/static/Pictures/backup.png">     <!--Insert picture-->
-        </button> 
-       </a>
-    </div>
-</div>
-
-
-
- 
-</body>
+    <script src="/static/googleapp.js"></script>
+  </body>
 </html>
