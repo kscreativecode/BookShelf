@@ -12,12 +12,22 @@ function fetchBooks(query, apiKey) {
       return [];
     });
 }
+
+function extractGenres(book) {
+    // Überprüfe die Struktur des Buchobjekts
+    console.log("Buch-Daten:", book);
+  
+    // Die Genres befinden sich oft im `volumeInfo`-Objekt unter `categories`
+    return book.volumeInfo?.categories || [];
+  }
+
 // create an HTML element that represents a book
 function createBookElement(
   title,
   authors,
   thumbnail,
   bookId,
+  genres = [], //Füge Genres als optionalen Parameter hinzu
   isSaved = false,
   mode = "default"
 ) {
@@ -58,9 +68,14 @@ function createBookElement(
     
         const bookAuthors = document.createElement("p");
         bookAuthors.textContent = `Autor(en): ${authors}`;
-    
+
+       const bookGenres = document.createElement("p");
+       bookGenres.textContent = `Genre(s): ${genres.join(", ")}`;
+           
+        
         bookBack.appendChild(bookTitle);
         bookBack.appendChild(bookAuthors);
+        bookBack.appendChild(bookGenres);
     
         // Füge Vorder- und Rückseite zum Buch hinzu
         book.appendChild(bookFront);
@@ -227,10 +242,12 @@ function displaySavedBooks() {
       book.authors,
       book.thumbnail,
       book.id,
+      book.genres,
       true,
       "rotatingThumbnail" // Hier wird der 'mode'-Parameter festgelegt
-      
     );
+    console.log("Buchinfo:", book); // Füge diese Zeile hinzu, um das Buchobjekt zu überprüfen
+
     addBookToContainer("saved-books", bookElement);
   });
 }
@@ -249,30 +266,34 @@ function displayBooks(
     return;
   }
 
+  console.log("displayBooks aufgerufen"); // Überprüfe, ob die Funktion aufgerufen wird
+
   if (clearContainer) {
     container.innerHTML = ""; // Container leeren, bevor neue Bücher hinzugefügt werden
   }
 
   books.forEach((book) => {
-    console.log("Verarbeite Buch:", book); // Füge diese Zeile hinzu, um das Buchobjekt zu überprüfen
-
+   
     const title = book.title || book.volumeInfo?.title || "Unbekannter Titel";
     const authors = Array.isArray(book.authors)
       ? book.authors.join(", ")
       : book.authors || "Unbekannter Autor";
     const thumbnail =
-      book.thumbnail || book.volumeInfo?.imageLinks?.thumbnail || "";
+      book.thumbnail || book.volumeInfo?.imageLinks?.thumbnail || ""; 
     const bookId = book.id || book.volumeInfo?.id || "unknown_id";
+    const genres = book.genres  || book.volumeInfo?.categories  || "";
 
     const bookElement = createBookElement(
       title,
       authors,
       thumbnail,
       bookId,
+      genres,
       isSaved,
       mode
     );
     container.appendChild(bookElement);
+    
   });
 }
 
