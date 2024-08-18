@@ -31,7 +31,44 @@ function createBookElement(
       bookCover.src = thumbnail;
       bookCover.alt = `Cover von ${title}`;
       bookItem.appendChild(bookCover);
-    }
+    }}
+
+    else if (mode === "rotatingThumbnail") {
+        // 3D-Rotation: Buchcover vorne, Titel und Autoren hinten
+        const book = document.createElement("div");
+        book.classList.add("book");
+    
+        // Vorderseite - Buchcover
+        const bookFront = document.createElement("div");
+        bookFront.classList.add("book-front");
+    
+        const bookCover = document.createElement("img");
+        if (thumbnail) {
+          bookCover.src = thumbnail;
+          bookCover.alt = `Cover von ${title}`;
+        }
+        bookFront.appendChild(bookCover);
+    
+        // Rückseite - Titel und Autor(en)
+        const bookBack = document.createElement("div");
+        bookBack.classList.add("book-back");
+    
+        const bookTitle = document.createElement("h2");
+        bookTitle.textContent = title;
+    
+        const bookAuthors = document.createElement("p");
+        bookAuthors.textContent = `Autor(en): ${authors}`;
+    
+        bookBack.appendChild(bookTitle);
+        bookBack.appendChild(bookAuthors);
+    
+        // Füge Vorder- und Rückseite zum Buch hinzu
+        book.appendChild(bookFront);
+        book.appendChild(bookBack);
+    
+        // Füge das Buch zum Container hinzu
+        bookItem.appendChild(book);
+
   } else {
     // Vollständige Ansicht anzeigen
     const bookTitle = document.createElement("h2");
@@ -190,25 +227,12 @@ function displaySavedBooks() {
       book.authors,
       book.thumbnail,
       book.id,
-      true
+      true,
+      "rotatingThumbnail" // Hier wird der 'mode'-Parameter festgelegt
+      
     );
     addBookToContainer("saved-books", bookElement);
   });
-}
-
-//shows the last five books saved
-function displayLastFiveBooks() {
-  const container = document.getElementById("latest-books-container");
-  if (!container) {
-    console.error('Container "latest-books-container" nicht gefunden');
-    return;
-  }
-  console.log("Container gefunden:", container);
-
-  const books = getLastFiveBooks();
-  console.log("Anzuzeigende Bücher:", books);
-
-  displayBooks(books, "latest-books-container", true, true, "thumbnailOnly");
 }
 
 //Display a list of books in a specified container element on the web page
@@ -251,6 +275,21 @@ function displayBooks(
     container.appendChild(bookElement);
   });
 }
+
+//shows the last five books saved
+function displayLastFiveBooks() {
+    const container = document.getElementById("latest-books-container");
+    if (!container) {
+      console.error('Container "latest-books-container" nicht gefunden');
+      return;
+    }
+    console.log("Container gefunden:", container);
+  
+    const books = getLastFiveBooks();
+    console.log("Anzuzeigende Bücher:", books);
+  
+    displayBooks(books, "latest-books-container", true, true, "thumbnailOnly");
+  }
 
 function showNotification(message) {
   const notification = document.getElementById("notification");
