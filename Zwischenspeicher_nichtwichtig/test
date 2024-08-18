@@ -1,0 +1,53 @@
+function createBookElement(title, authors, thumbnail, bookId, isSaved = false, mode = 'default') {
+    const bookItem = document.createElement('div');
+    bookItem.classList.add('book-item');
+
+    if (mode === 'thumbnailOnly') {
+        // Nur das Thumbnail anzeigen
+        const bookCover = document.createElement('img');
+        if (thumbnail) {
+            bookCover.src = thumbnail;
+            bookCover.alt = `Cover von ${title}`;
+            bookItem.appendChild(bookCover);
+        }
+    } else {
+        // Vollständige Ansicht anzeigen
+        const bookTitle = document.createElement('h2');
+        bookTitle.textContent = title;
+
+        const bookAuthors = document.createElement('p');
+        bookAuthors.textContent = `Autor(en): ${authors}`;
+
+        const bookCover = document.createElement('img');
+        if (thumbnail) {
+            bookCover.src = thumbnail;
+            bookCover.alt = `Cover von ${title}`;
+            bookItem.appendChild(bookCover);
+        }
+
+        bookItem.appendChild(bookTitle);
+        bookItem.appendChild(bookAuthors);
+    }
+
+    if (!isSaved) {
+        const saveButton = document.createElement('button');
+        saveButton.textContent = 'Gelesen';
+        saveButton.onclick = () => {
+            saveBookToLocalStorage({ title, authors, thumbnail, id: bookId });
+            showNotification('Buch hinzugefügt');
+        };
+        bookItem.appendChild(saveButton);
+    }
+
+    if (isSaved) {
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Löschen';
+        deleteButton.onclick = () => {
+            deleteBookFromLocalStorage(bookId);
+            showNotification('Buch gelöscht');
+        };
+        bookItem.appendChild(deleteButton);
+    }
+
+    return bookItem;
+}

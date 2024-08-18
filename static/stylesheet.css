@@ -1,223 +1,214 @@
-<style>
-   {}
+/* Ganzes Layout */
+body {
+    font-family: "Open Sans", sans-serif;
+    background-color: gainsboro;
+    padding-left: 100px;
+    padding-right: 100px;
+}
 
-   /* Whole body design*/
+/* Design für die Überschrift */
+.headline {
+    color: rgb(181, 78, 187);
+    font-family: "Dancing Script", cursive;
+    font-size: 60px;
+}
 
-    body{
-        font-family: "Open Sans", sans-serif;
-        background-color: lightgrey;
-        padding-left: 100px;
-        padding-right: 100px;    
-    }
+/* Navigation Bar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-    /* Healine Design*/
-   
-    .headline{
-        color:rgb(181, 78, 187);
-        font-family: "Dancing Script", cursive;
-        font-size: 60px;
-    }
+a {
+    color: rgb(192, 140, 140);
+    text-decoration: none;
+    margin-left: 16px;
+    font-weight: 600;
+}
 
-    
-    .navbar{
-        display:flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+a.subpage:hover {
+    text-decoration: underline;
+    text-decoration-color: brown;
+}
 
-    a{
-        color: rgb(192, 140, 140);
-        text-decoration: none;
-        margin-left: 16px;
-        font-weight: 600;
-    }
+a.title:hover {
+    text-decoration: none;
+}
 
-    a.subpage:hover{
-        text-decoration: underline;
-        text-decoration-color: brown;
-    }
-
-    a.title:hover{
-        text-decoration: none;
-
-    }
- 
-    /*Container Design Front Page*/
-    .header_image{
-        width:100%;
-        height:400px;
-        object-fit: cover;
-        object-position: 50% 40%;
-        display: block;
-    }
-
-    .button_image{
-        width:70px;
-        height:70px;
-        object-fit: cover;
-        object-position: 50% 50%;
-        
-
-    }
-    .front_container{
-        background-color: white;
-        padding: 16px;
-    }
-
-    .second_container{
-        background-color: white;
-        padding: 16px;
-        display: flex;
-        justify-content: space-between;
-
-    }
-
-    .button_container{
-        background-color: lightgrey;
-        padding: 16px;
-        display: flex;
-        justify-content: space-between;
-
-    }
-
-    .caption_container{
-    background-color: lightgrey;
-    padding: 8px;
-    color: black;
-    font-weight:600;
-    }
-.left_image{
-    width:100%;
-    height:400px;
+/* Container Design für die Startseite */
+.header_image {
+    width: 100%;
+    height: 400px;
     object-fit: cover;
     object-position: 50% 40%;
     display: block;
+}
 
-    }
-    .right_container{
-        width: 30%;
-        border-left:solid;
-        border-color: white;
-        border-width: 16px;
+.button_image {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    object-position: 50% 50%;
+}
 
-    }
+/* Allgemeine Container-Designs */
+.front_container {
+    background-color: white;
+    padding: 16px;
+}
 
-    button{
-        border: none;
-        cursor: pointer;
-        appearance: none;
-        background-color: inherit;
-    }
+.second_container {
+    background-color: white;
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.button_container {
+    background-color: lightgray;  /* Hintergrundfarbe des Containers */
+    padding: 10px;                /* Innenabstand des Containers */
+    display: flex;                /* Flexbox Layout für die Kinder-Elemente */
+    justify-content: space-between; /* Gleichmäßige Verteilung der Kinder-Elemente */
+}
+
+.caption_container {
+    align-items: center;         /* Horizontale Zentrierung */
+    justify-content: center;     /* Vertikale Zentrierung */
+    text-align: center;          /* Textzentrierung */
+    background-color: lightgray; /* Hintergrundfarbe */
+    padding: 10px;               /* Innenabstand */
+}
+
+.left_image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    object-position: 50% 40%;
+    display: block;
+}
+
+.right_container {
+    width: 30%;
+    border-left: solid;
+    border-color: white;
+    border-width: 16px;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    appearance: none;
+    background-color: inherit;
+}
+
+button:active {
+    text-decoration: unset;
+    position: relative;
+    top: 2px;
+}
+
+button:hover {
+    transform: rotate(360deg);
+}
+
+/* Buchlisten-Design */
+
+/* Suchfeld Design */
+#searchSection {
+    margin-bottom: 20px;
+}
+
+#searchInput {
+    width: 300px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+#searchButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
 
 
+/* Benachrichtigungen */
+#notification {
+    display: none;
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+    position: fixed; /* Positioniert es am oberen Rand */
+    top: 10px;
+    right: 10px;
+    z-index: 1000; /* Stellt sicher, dass es über anderen Inhalten angezeigt wird */
+}
 
-      button:active {
-        text-decoration: unset;
-        position: relative;
-        top: 2px;
-      }
+/* Container für die letzten Bücher */
+#latest-books-container {
+    background-color: #f0f0f0; /* Hintergrundfarbe */
+    padding: 10px; /* Innenabstand */
+    border: 1px solid #ccc; /* Rand */
+    display: flex;
+    flex-wrap: wrap; /* Zeilenumbruch bei vielen Büchern */
+    gap: 10px; /* Abstand zwischen Büchern */
+    margin: 0; /* Kein zusätzlicher Abstand oben und unten */
+    flex-direction: row;
+}
 
-    button:hover{
-        transform:rotate(360deg);
-    }
+/* Buch-Container für den 3D-Effekt */
+.book {
+   /* position: relative;
+    perspective: 1000px; /* Perspektive für 3D-Effekte 
+    margin: 0; */
 
+}
 
+/* Buch-Item für die 3D-Transformation */
+.book-item {
+    position: static;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s; /* Dauer der Dreh-Animation */
+}
 
-    .booklist {
-        margin-top: 20px;
-        padding: 0 20px 10px 25px;
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        list-style: none;
-      }
+/* 3D-Rotation beim Hover */
+.book-item:hover {
+    transform: rotateY(180deg);
+}
 
-      .booklist li{
-        font-size: small;
-        background-color: whitesmoke;
-        padding: 10px;
-      }
-
-      .bookoverview{
-        background-color: white;
-        padding: 16px;
-        display: flex;
-        justify-content: space-between;
-    }
-
-    #searchSection {
-        margin-bottom: 20px;
-    }
-
-    #searchInput {
-        width: 300px;
-        padding: 10px;
-        font-size: 16px;
-    }
-
-    #searchButton {
-        padding: 10px 20px;
-        font-size: 16px;
-        cursor: pointer;
-    }
-
-    #book-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-    }
-
-
-    #notification {
-        display: none;
-        background-color: #d4edda;
-        color: #155724;
-        padding: 10px;
-        margin: 10px 0;
-        border: 1px solid #c3e6cb;
-        border-radius: 5px;
-        position: fixed; /* Positioniert es am oberen Rand */
-        top: 10px;
-        right: 10px;
-        z-index: 1000; /* Stellt sicher, dass es über anderen Inhalten angezeigt wird */
-    }
+/* Vorder- und Rückseite des Buchs */
+.front, .back {
+    position: static;
+    width: 100%; /* Nimmt die gesamte Breite ein */
+    height:100%; /* Nimmt die gesamte Höhe ein */
+    backface-visibility: hidden; /* Verhindert die Sichtbarkeit der Rückseite bei Nicht-Drehung */
+    border-radius: 5px; /* Runde Ecken */
+    overflow: hidden; /* Verhindert, dass Inhalte außerhalb angezeigt werden */
     
+}
 
-    #latest-books-container {
-        background-color: #f0f0f0; /* Hintergrundfarbe für Sichtbarkeit */
-        padding: 2px;
-        border: 1px solid #ccc; /* Rand zur besseren Sichtbarkeit */
-        display: block;
-        margin: 2px 0;
-    }
-    
+/* Stil für die Vorderseite des Buchs */
+.front img {
+    width: auto; /* Bild nimmt die gesamte Breite der Vorderseite ein */
+    height: auto; /* Höhe automatisch angepasst */
+    display: block; /* Entfernt zusätzlichen Abstand unter dem Bild */
+}
 
-    #latest-books-container {
-        background-color: #f0f0f0; /* Hintergrundfarbe für Sichtbarkeit */
-        padding: 10px; /* Padding für den Container */
-        border: 1px solid #ccc; /* Rand zur besseren Sichtbarkeit */
-        display: flex;
-        flex-wrap: wrap; /* Falls es mehr Bücher gibt, als in eine Reihe passen, werden sie in die nächste Reihe umgebrochen */
-        gap: 10px; /* Abstand zwischen den Büchern */
-        margin: 0; /* Kein zusätzlicher Abstand oben und unten */
-    }
-    
-    .book-item img {
-        max-width: 100%;
-        height: auto;
-        display: block; /* Stellt sicher, dass das Bild angezeigt wird */
-        margin-bottom: 10px;
-    }
-
-    .book-item {
-        background-color: white;
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        width: 200px; /* Breite der Bücher-Items */
-        text-align: center;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        margin: 0; /* Kein zusätzlicher Abstand um die Bücher-Items herum */
-    }
-        }
-  </style> 
+/* Stil für die Rückseite des Buchs */
+.back {
+    transform: rotateY(180deg); /* Rückseite um 180 Grad drehen */
+    background-color: white; /* Hintergrundfarbe */
+    display: flex;
+    justify-content: start; /* Horizontale Zentrierung */
+    align-items: start; /* Vertikale Zentrierung */
+    flex-direction: column; /* Inhalt in einer Spalte anordnen */
+    padding: 20px; /* Innenabstand */
+    box-sizing: border-box; /* Padding und Border in die Gesamtgröße einbeziehen */
+    border: 1px solid #ddd; /* Rand */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Leichter Schatten */
+}

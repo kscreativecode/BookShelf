@@ -35,46 +35,26 @@
 <div class="button_container"> <!--Unsicherbarer Container div-->
 <!-- Suchbereich -->
 
-<div class="caption_container">
-Gespeicherte Bücher: 
+    <div class="book-container">
 
-<div id="saved-books"></div>
+        <div id="saved-books"></div>
 
-<script src="/static/googleapp.js"></script>
-<input type="file" id="upload" accept=".json" />
-<script>
-    document.getElementById('upload').addEventListener('change', function(event) {
-        const file = event.target.files[0];
-        if (file && file.type === 'application/json') {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const data = JSON.parse(e.target.result);
-                Object.keys(data).forEach(key => {
-                    localStorage.setItem(key, data[key]);
-                });
-                alert('localStorage erfolgreich wiederhergestellt!');
-            };
-            reader.readAsText(file);
-        } else {
-            alert('Bitte eine gültige JSON-Datei hochladen.');
-        }
-    });
-</script>
-</div>
-
-
-<!--hier soll bei drücken des knopfes eine Backup Datei erzeugt werden-->
-    <div >
-       <a href="/templates/bookshelf.html">
-        <button type="button" >
-            <img class="button_image" src="/static/Pictures/backup.png">     <!--Insert picture-->
-        </button> 
-       </a>
+        <script src="/static/googleapp.js"></script>
     </div>
-</div>
-
-
 
  
+
+  <!-- Button für Backup -->
+  <div>
+      <button id="backupButton" type="button">
+          <img class="button_image" src="/static/Pictures/backup.png">     <!--Insert picture-->
+      </button> 
+  </div>
+
+  <script src="/static/backup.js"></script>
+</div>
+  <!-- Hochladen einer JSON-Datei , soll ganz utnen sein-->
+<input type="file" id="upload">
+
 </body>
 </html>

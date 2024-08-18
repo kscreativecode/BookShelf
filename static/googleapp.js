@@ -22,22 +22,26 @@ function createBookElement(title, authors, thumbnail, bookId, isSaved = false, m
             bookItem.appendChild(bookCover);
         }
     } else {
-        // Vollständige Ansicht anzeigen
-        const bookTitle = document.createElement('h2');
-        bookTitle.textContent = title;
-
-        const bookAuthors = document.createElement('p');
-        bookAuthors.textContent = `Autor(en): ${authors}`;
-
-        const bookCover = document.createElement('img');
+        // Full view including front and back
+        const front = document.createElement('div');
+        front.className = 'front';
+        const bookCover = document.createElement('h2');
         if (thumbnail) {
             bookCover.src = thumbnail;
             bookCover.alt = `Cover von ${title}`;
-            bookItem.appendChild(bookCover);
+            front.appendChild(bookCover);
         }
+        bookItem.appendChild(front);
 
-        bookItem.appendChild(bookTitle);
-        bookItem.appendChild(bookAuthors);
+        const back = document.createElement('div');
+        back.className = 'back';
+        const bookTitle = document.createElement('h3');
+        bookTitle.textContent = title;
+        const bookAuthors = document.createElement('p');
+        bookAuthors.textContent = `Autor(en): ${authors}`;
+        back.appendChild(bookTitle);
+        back.appendChild(bookAuthors);
+        bookItem.appendChild(back);
     }
 
     if (!isSaved) {
